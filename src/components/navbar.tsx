@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/events", label: "Events" },
   { href: "/deals", label: "Deals" },
   { href: "/directory", label: "Directory" },
+  { href: "/discussions", label: "Discussions" },
 ];
 
 export function Navbar() {
