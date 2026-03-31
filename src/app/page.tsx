@@ -60,7 +60,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — full viewport */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden -mt-16">
         <Image
           src="https://upload.wikimedia.org/wikipedia/commons/3/33/Downtown_Edwardsville_Illinois.jpg"
           alt="Downtown Edwardsville"
