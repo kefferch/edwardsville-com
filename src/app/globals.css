@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF7F2;
+  --foreground: #1a1a1a;
   --blue: #1B3A6B;
   --blue-light: #244d8a;
   --blue-dark: #132a4f;
   --gold: #C9A84C;
   --gold-light: #d4b96a;
+  --cream: #FAF7F2;
+  --cream-dark: #F0EBE3;
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
@@ -28,6 +30,8 @@
   --color-blue-dark: var(--blue-dark);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
   --color-gray-50: var(--gray-50);
   --color-gray-100: var(--gray-100);
   --color-gray-200: var(--gray-200);
@@ -39,7 +43,11 @@
   --color-gray-800: var(--gray-800);
   --color-gray-900: var(--gray-900);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -48,7 +56,21 @@ body {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Scroll indicator animation */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Horizontal scroll hide scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

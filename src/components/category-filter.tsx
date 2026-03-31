@@ -13,10 +13,10 @@ export function CategoryFilter({ categories, active, onChange }: CategoryFilterP
         <button
           key={cat}
           onClick={() => onChange(cat)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
             active === cat
               ? "bg-blue text-white shadow-md"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              : "bg-white text-gray-600 hover:bg-cream-dark shadow-sm"
           }`}
         >
           {cat}

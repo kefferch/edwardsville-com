@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -16,11 +16,27 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="bg-blue text-white sticky top-0 z-50">
-      <nav className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-baseline gap-0 text-xl font-bold tracking-tight">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-blue-dark/95 backdrop-blur-md shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <nav className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+        <Link
+          href="/"
+          className="flex items-baseline gap-0 text-2xl font-serif font-bold tracking-tight text-white"
+        >
           <span>edwardsville</span>
           <span className="text-gold">.com</span>
         </Link>
@@ -33,13 +49,16 @@ export function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
                     active
-                      ? "bg-white/15 text-gold"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                      ? "text-gold"
+                      : "text-white/80 hover:text-white"
                   }`}
                 >
                   {link.label}
+                  {active && (
+                    <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-gold rounded-full" />
+                  )}
                 </Link>
               </li>
             );
@@ -48,7 +67,7 @@ export function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+          className="md:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -64,8 +83,8 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/10 bg-blue-dark">
-          <ul className="px-4 py-3 space-y-1">
+        <div className="md:hidden bg-blue-dark/95 backdrop-blur-md border-t border-white/10">
+          <ul className="px-6 py-4 space-y-1">
             {navLinks.map((link) => {
               const active = pathname === link.href;
               return (
@@ -73,10 +92,10 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       active
-                        ? "bg-white/15 text-gold"
-                        : "text-white/80 hover:text-white hover:bg-white/10"
+                        ? "text-gold bg-white/10"
+                        : "text-white/80 hover:text-white hover:bg-white/5"
                     }`}
                   >
                     {link.label}
